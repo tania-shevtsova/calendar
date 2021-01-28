@@ -66,7 +66,7 @@ class App extends React.Component {
       event: event,
       evt: event,
       note: event.extendedProps.description,
-      background: event.backgroundColor
+      background: event.backgroundColor,
     });
   };
 
@@ -131,17 +131,17 @@ class App extends React.Component {
       if (prop.id + "" === eventId + "") {
         if (newdate) {
           event.remove();
-          if(evt.extendedProps){
+          if (evt.extendedProps) {
             this.setState({
-              note: evt.extendedProps.description
-            })
+              note: evt.extendedProps.description,
+            });
           }
           return {
             ...prop,
             title: name ? name : evt.title,
             start: newdate,
             backgroundColor: background,
-            description: note
+            description: note,
           };
         }
       } else {
@@ -192,7 +192,17 @@ class App extends React.Component {
   };
 
   handleEditChange = (e) => {
-    this.setState({ evt: {}, name: e.target.value });
+    const { evt } = this.state;
+    this.setState({
+      evt: {
+        title: "",
+        start: evt.start,
+        extendedProps: {
+          description: evt.extendedProps.description,
+        },
+      },
+      name: e.target.value,
+    });
   };
 
   render() {
@@ -338,8 +348,8 @@ function ModalCreate(props) {
           </form>
         </div>
         <div className="modal-footer">
-        <Button
-        id="btn-cancel"
+          <Button
+            id="btn-cancel"
             className="ml-auto"
             color="link"
             type="button"
@@ -355,7 +365,6 @@ function ModalCreate(props) {
           >
             Save
           </Button>
-      
         </div>
       </Modal>
     </>
@@ -420,7 +429,7 @@ function ModalUpdate(props) {
         </div>
         <div className="modal-footer">
           <Button
-          id="btn-discard"
+            id="btn-discard"
             className="ml-auto"
             color="link"
             type="button"
