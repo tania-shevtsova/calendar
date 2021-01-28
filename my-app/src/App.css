@@ -195,8 +195,12 @@
   color: red !important;
 }
 
+a{
+  color: #000 !important;
+}
+
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 350px !important;
+    width: 350px !important;
   }
 }
