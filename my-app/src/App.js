@@ -22,7 +22,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, FormGroup, Input, Modal } from "reactstrap";
 let evtId = 0;
-const format = "h:mm a";
 class App extends React.Component {
   constructor(props) {
     super();
@@ -80,7 +79,7 @@ class App extends React.Component {
     this.toggle();
   };
 
-  submit = () => {
+  handleCreate = () => {
     const { date, time, name, background, note } = this.state;
     let newdate = new Date(moment(date).format("MM/DD/YYYY") + " " + time);
     let calendarApi = this.calendarRef.current.getApi().view.calendar;
@@ -260,7 +259,7 @@ class App extends React.Component {
             date={date}
             name={name}
             handleChange={this.handleChange}
-            submit={this.submit}
+            submit={this.handleCreate}
             toggle={this.toggle}
             note={note}
           ></ModalCreate>
@@ -326,7 +325,7 @@ function ModalCreate(props) {
                 placeholder="event time"
                 className="xxx"
                 onChange={props.onChangeTime}
-                format={format}
+                format="h:mm a"
                 use12Hours
                 inputReadOnly
               />
@@ -405,7 +404,7 @@ function ModalUpdate(props) {
                 placeholder={moment(props.start).format("h:mm a")}
                 className="xxx"
                 onChange={props.onChangeTime}
-                format={format}
+                format="h:mm a"
                 use12Hours
                 inputReadOnly
               />
